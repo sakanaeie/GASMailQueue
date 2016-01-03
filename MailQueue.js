@@ -6,13 +6,11 @@ function jobMailQueue() {
 // class =======================================================================
 var MailQueue = (function() {
   // constructor ---------------------------------------------------------------
-  function MailQueue()
-  {
+  function MailQueue() {
   }
 
   // public --------------------------------------------------------------------
-  function exec(config, date)
-  {
+  function exec(config, date) {
     // 現在日時を取得する
     var now_date = Utilities.formatDate(date, 'Asia/Tokyo' , 'yyyyMMddHHmm');
     var now_d    = Utilities.formatDate(date, 'Asia/Tokyo' , 'dd');
@@ -84,7 +82,7 @@ var MailQueue = (function() {
 
       // メールを送信する
       if (is_send) {
-        MailApp.sendEmail(config.mail, row[config.column.subject], row[config.column.body]);
+        SendMessage.exec(config.mode, row[config.column.subject], row[config.column.body], config);
       }
     }
 

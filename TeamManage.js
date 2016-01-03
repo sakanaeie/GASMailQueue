@@ -3,7 +3,7 @@ function jobReset() {
   new TeamManage(TeamManageConfig, new Date()).reset();
 }
 
-function jobMornign() {
+function jobMorning() {
   new TeamManage(TeamManageConfig, new Date()).morning();
 }
 
@@ -14,24 +14,21 @@ function jobEvening() {
 // class =======================================================================
 var TeamManage = (function() {
   // constructor ---------------------------------------------------------------
-  function TeamManage(config, date)
-  {
+  function TeamManage(config, date) {
     this.config = config;
     this.date   = date;
   }
 
   // private -------------------------------------------------------------------
   // 土日祝日であるかどうか
-  function isTodayHoliday(date)
-  {
+  function isTodayHoliday(date) {
     var weekday = date.getDay();
     return (0 == weekday || 6 == weekday || MyUtil.isTodayHoliday(date));
   }
 
   // public --------------------------------------------------------------------
   // 管理状態をリセットする
-  function reset()
-  {
+  function reset() {
     if (isTodayHoliday(this.date)) {
       return; // 土日祝日であればすぐさま終わる
     }
@@ -58,8 +55,7 @@ var TeamManage = (function() {
   }
 
   // 朝の作業予定
-  function morning()
-  {
+  function morning() {
     var date = this.date;
     if (isTodayHoliday(this.date)) {
       return; // 土日祝日であればすぐさま終わる
@@ -107,12 +103,11 @@ var TeamManage = (function() {
       sheet.getRange(config.morning.status_cell).setValue('255');
     }
 
-    MailApp.sendEmail(config.mail, config.subject, mail_body);
+    SendMessage.exec(config.mode, config.subject, mail_body, config);
   }
 
   // 夜の作業報告
-  function evening()
-  {
+  function evening() {
     var date = this.date;
     if (isTodayHoliday(this.date)) {
       return; // 土日祝日であればすぐさま終わる
@@ -159,7 +154,7 @@ var TeamManage = (function() {
       status_cell.setValue('255');
     }
 
-    MailApp.sendEmail(config.mail, config.subject, mail_body);
+    SendMessage.exec(config.mode, config.subject, mail_body, config);
   }
 
   TeamManage.prototype = {

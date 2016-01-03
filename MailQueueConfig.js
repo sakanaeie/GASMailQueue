@@ -1,5 +1,6 @@
 // config ======================================================================
 var MailQueueConfig = {
+  mode:       'mail',
   mail:       'to@gmail.com',
   admin_mail: 'to@gmail.com',
   doc_id:     'doc_id',
@@ -13,5 +14,10 @@ var MailQueueConfig = {
     stop_mode: 4,  // 停止条件
     subject:   5,  // 件名
     body:      6,  // 本文
+  },
+  slack: {
+    api_url:   'URL',
+    show_name: 'NAME',
+    show_icon: 'ICON',
   },
 };
