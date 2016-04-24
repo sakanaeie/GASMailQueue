@@ -1,4 +1,9 @@
 var MyUtil = (function () {
+  // オブジェクトのタイプを判定する
+  function isObjectType(obj, type) {
+    return undefined !== obj && null !== obj && type === Object.prototype.toString.call(obj).slice(8, -1);
+  }
+
   // 0埋め
   function zerofill(val, width) {
     val = val.toString();
@@ -28,6 +33,7 @@ var MyUtil = (function () {
   }
 
   return {
+    isObjectType:   isObjectType,
     zerofill:       zerofill,
     isTodayHoliday: isTodayHoliday,
     repeat:         repeat,

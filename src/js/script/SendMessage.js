@@ -5,6 +5,7 @@ var SendMessage = (function() {
       case 'mail':
         MailApp.sendEmail(config.mail, subject, body);
         break;
+
       case 'slack':
         new SlackWebHooks().send(
           config.slack.api_url,
@@ -13,6 +14,7 @@ var SendMessage = (function() {
             channel:    subject,
             username:   config.slack.show_name,
             icon_emoji: config.slack.show_icon,
+            link_names: 1,
           }
         );
         break;

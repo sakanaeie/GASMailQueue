@@ -1,4 +1,28 @@
 // config ======================================================================
+var MailQueueConfig = {
+  mode:       'mail',
+  mail:       'to@gmail.com',
+  admin_mail: 'to@gmail.com',
+  doc_id:     'doc_id',
+  sheet_name: 'メールキュー',
+  system_row: 2,
+  column: {
+    ymd:       0,  // 年月日
+    hi:        1,  // 時分
+    weekday:   2,  // 曜日
+    include_n: 3,  // nの付く日
+    stop_mode: 4,  // 停止条件
+    subject:   5,  // 件名
+    body:      6,  // 本文
+  },
+  slack: {
+    api_url:   'URL',
+    show_name: 'NAME',
+    show_icon: 'ICON',
+  },
+};
+
+// config ======================================================================
 var TeamManageConfig = {
   mode:        'mail',
   mail:        'to@gmail.com',
@@ -24,11 +48,12 @@ var TeamManageConfig = {
     body:      2, // 作業予定
     body_next: 3, // 次回の作業予定
   },
-  emoticon: ['(rain)', ';(', ':|', ':D', '(sun)'],
-  emoticon_undefined: '(devil)',
+  emoticon: [';(', ':|', ':D'],
+  emoticon_undefined: ':|',
   slack: {
     api_url:   'URL',
     show_name: 'NAME',
     show_icon: 'ICON',
   },
 };
+

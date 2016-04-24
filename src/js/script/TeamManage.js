@@ -56,12 +56,11 @@ var TeamManage = (function() {
 
   // 朝の作業予定
   function morning() {
-    var date = this.date;
     if (isTodayHoliday(this.date)) {
       return; // 土日祝日であればすぐさま終わる
     }
 
-    var hhii   = Utilities.formatDate(date, 'Asia/Tokyo' , 'HHmm');  // 現在日時を取得する
+    var hhii   = Utilities.formatDate(this.date, 'Asia/Tokyo', 'HHmm'); // 現在日時を取得する
     var config = this.config;
     if (config.morning.start > hhii || config.morning.end < hhii) {
       return; // 処理時間でなければすぐさま終わる
@@ -108,12 +107,11 @@ var TeamManage = (function() {
 
   // 夜の作業報告
   function evening() {
-    var date = this.date;
     if (isTodayHoliday(this.date)) {
       return; // 土日祝日であればすぐさま終わる
     }
 
-    var hhii   = Utilities.formatDate(date, 'Asia/Tokyo' , 'HHmm');  // 現在日時を取得する
+    var hhii   = Utilities.formatDate(this.date, 'Asia/Tokyo', 'HHmm'); // 現在日時を取得する
     var config = this.config;
     if (config.evening.start > hhii) {
       return; // 処理時間でなければすぐさま終わる

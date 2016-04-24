@@ -41,10 +41,20 @@ var MailQueue = (function() {
         continue;
       }
 
-      var ymd = row[config.column.ymd].split('/');
-      var hi  = row[config.column.hi].split(':');
-      var is_send = false;
+      // 日付をパースする
+      var ymd = row[config.column.ymd];
+      if (MyUtil.isObjectType(ymd, 'Date')) {
+        ymd = Utilities.formatDate(ymd, 'Asia/Tokyo', 'yyyy/MM/dd')
+      }
+      var hi = row[config.column.hi];
+      if (MyUtil.isObjectType(hi, 'Date')) {
+        hi = Utilities.formatDate(hi, 'Asia/Tokyo', 'HH:mm')
+      }
+      ymd = ymd.split('/');
+      hi  = hi.split(':');
 
+      // 条件を確認する
+      var is_send = false;
       if ('' !== row[config.column.ymd]) {
         // 年月日モード
         var str = ymd[0] + MyUtil.zerofill(ymd[1], 2) + MyUtil.zerofill(ymd[2], 2) + MyUtil.zerofill(hi[0], 2) + MyUtil.zerofill(hi[1], 2);
