@@ -12,9 +12,9 @@ var MailQueue = (function() {
   // public --------------------------------------------------------------------
   function exec(config, date) {
     // 現在日時を取得する
-    var now_date = Utilities.formatDate(date, 'Asia/Tokyo' , 'yyyyMMddHHmm');
-    var now_d    = Utilities.formatDate(date, 'Asia/Tokyo' , 'dd');
-    var now_time = Utilities.formatDate(date, 'Asia/Tokyo' , 'HHmm');
+    var now_date = Utilities.formatDate(date, 'Asia/Tokyo', 'yyyyMMddHHmm');
+    var now_d    = Utilities.formatDate(date, 'Asia/Tokyo', 'dd');
+    var now_time = Utilities.formatDate(date, 'Asia/Tokyo', 'HHmm');
     var weekday  = date.getDay();
     var is_today_holiday = MyUtil.isTodayHoliday(date);                         // 祝日か
     var is_today_dayoff  = (0 == weekday || 6 == weekday || is_today_holiday);  // 土日祝日か
@@ -41,7 +41,7 @@ var MailQueue = (function() {
         continue;
       }
 
-      // 日付をパースする
+      // 日時をパースする
       var ymd = row[config.column.ymd];
       if (MyUtil.isObjectType(ymd, 'Date')) {
         ymd = Utilities.formatDate(ymd, 'Asia/Tokyo', 'yyyy/MM/dd')
@@ -87,7 +87,7 @@ var MailQueue = (function() {
         }
       } else {
         // 不明
-        MailApp.sendEmail(config.admin_mail, 'メールキューにモード設定の不定な予定があります', row[config.column.body]);
+        MailApp.sendEmail(config.admin_mail, 'メールキューにモード設定の不明な予定があります', row[config.column.body]);
       }
 
       // メールを送信する
